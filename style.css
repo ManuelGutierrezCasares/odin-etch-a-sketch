@@ -5,8 +5,3 @@
     display: flex;
     flex-wrap: wrap;
 }
-.square{
-    /*border: 1px red solid;*/
-    /*flex: 1 1 50px;*/
-    flex: 1 1 80px
-}

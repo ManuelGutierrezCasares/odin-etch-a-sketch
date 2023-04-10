@@ -1,15 +1,24 @@
-document.addEventListener('touchstart', function(e){e.preventDefault()});
-document.addEventListener('touchmove', function(e){e.preventDefault()});
-document.addEventListener('touchend', function(e){e.preventDefault()});
-
 const container = document.querySelector('.container');
 let input = document.querySelector('#user-input');
+//validation for input
 let gridQuantity = Number(prompt('Enter the number of squares per side: '));
+while(gridQuantity <= 0 || isNaN(gridQuantity)){
+    alert(`ERROR: ${gridQuantity} is not a number.`);
+    gridQuantity = Number(prompt('Enter the number of squares per side: '));
+}
 let instructions = document.querySelector('#instructions');
-
 let square = document.querySelectorAll('.square')
-square.forEach(e=>e.addEventListener('mouseover', paintSquares));
-square.forEach(e=>e.addEventListener('touchmove', paintSquares));
+let black = true;
+let color = document.querySelector('select');
+
+
+function checkColor(e){
+    if(e.target.value === 'black'){
+        black = true;
+    }else{
+        black = false;
+    }
+}
 
 const size = document.querySelector('#size');
 size.addEventListener('click',enhanceSize);
@@ -32,7 +41,6 @@ function createSquares(squareAmount){
     }
 }
 
-
 function removeSquares(){
         square.forEach(e=>container.removeChild(e));
 };
@@ -40,10 +48,13 @@ function removeSquares(){
 
 
 function paintSquares(e){
-    e.target.style.background = 'black';
+    color.addEventListener('input',checkColor)
+    if(black){
+        e.target.style.background = 'black';
+    }else{
+        e.target.style.background = `rgb(${e.x},${e.y},40)`;
+    }   
 }
-
-
 
 function enhanceSize(){
     if(document.querySelector('.square')){
@@ -56,7 +67,7 @@ function enhanceSize(){
     let pixels = getPixels(gridQuantity);
     square.forEach(e=>e.style.flex=`1 1 ${pixels}px`);
     square.forEach(e=>e.addEventListener('mouseover', paintSquares));
-    square.forEach(e=>e.addEventListener('touchmove', paintSquares));
+
 }
 
 
