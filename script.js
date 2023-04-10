@@ -1,3 +1,7 @@
+document.addEventListener('touchstart', function(e){e.preventDefault()});
+document.addEventListener('touchmove', function(e){e.preventDefault()});
+document.addEventListener('touchend', function(e){e.preventDefault()});
+
 const container = document.querySelector('.container');
 let input = document.querySelector('#user-input');
 let gridQuantity = Number(prompt('Enter the number of squares per side: '));
